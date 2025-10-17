@@ -274,7 +274,16 @@ namespace gscam {
         ROS_ERROR("Could not get gstreamer sample.");
         break;
       }
-      GstBuffer* buf = gst_sample_get_buffer(sample);
+      GstBuffer* buf_orig = gst_sample_get_buffer(sample);
+      
+      // Create a writable copy for multiplanar cameras (rkisp_v5 driver fix)
+      GstBuffer* buf = gst_buffer_copy_deep(buf_orig);
+      if(!buf) {
+        ROS_ERROR("Could not copy gstreamer buffer.");
+        gst_sample_unref(sample);
+        break;
+      }
+      
       GstMemory *memory = gst_buffer_get_memory(buf, 0);
       GstMapInfo info;
 
@@ -391,8 +400,11 @@ namespace gscam {
 #if (GST_VERSION_MAJOR == 1)
         gst_memory_unmap(memory, &info);
         gst_memory_unref(memory);
-#endif
+        gst_buffer_unref(buf);  // Unref our copied buffer
+        gst_sample_unref(sample);  // Unref the original sample
+#else
         gst_buffer_unref(buf);
+#endif
       }
 
       ros::spinOnce();
