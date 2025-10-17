@@ -1,0 +1,52 @@
+<launch>
+  <!-- Launch file for multiplanar camera with UYVY format
+       This configuration is optimized for cameras that output UYVY format
+       and require io-mode=2 (mmap with userptr) -->
+
+  <arg name="DEVICE" default="/dev/video0"/>
+  <arg name="WIDTH" default="320"/>
+  <arg name="HEIGHT" default="240"/>
+  <arg name="FPS" default="40/1"/>
+  <arg name="CAMERA_NAME" default="multiplanar_camera"/>
+  <arg name="FRAME_ID" default="camera"/>
+  <arg name="CAMERA_INFO_URL" default=""/>
+
+  <node name="gscam_multiplanar" pkg="gscam" type="gscam" output="screen">
+    <!-- Camera identification -->
+    <param name="camera_name" value="$(arg CAMERA_NAME)"/>
+    
+    <!-- Camera calibration file (optional) -->
+    <param if="$(eval CAMERA_INFO_URL != '')" name="camera_info_url" value="$(arg CAMERA_INFO_URL)"/>
+    <param unless="$(eval CAMERA_INFO_URL != '')" name="camera_info_url" value="package://gscam/examples/uncalibrated_parameters.ini"/>
+    
+    <!-- GStreamer pipeline configuration for multiplanar UYVY camera
+         - v4l2src: Video4Linux2 source
+         - io-mode=4: Use dmabuf (better for multiplanar cameras)
+         - format=UYVY: Multiplanar YUV format
+         - videoconvert: Convert UYVY to RGB for ROS
+    -->
+    <param name="gscam_config" 
+           value="v4l2src device=$(arg DEVICE) io-mode=4 ! video/x-raw,format=UYVY,width=$(arg WIDTH),height=$(arg HEIGHT),framerate=$(arg FPS) ! videoconvert ! video/x-raw,format=RGB"/>
+    
+    <!-- Frame ID for TF -->
+    <param name="frame_id" value="$(arg FRAME_ID)"/>
+    
+    <!-- Image encoding -->
+    <param name="image_encoding" value="rgb8"/>
+    
+    <!-- Sync sink: false for better performance with high frame rates -->
+    <param name="sync_sink" value="false"/>
+    
+    <!-- Use GStreamer timestamps -->
+    <param name="use_gst_timestamps" value="false"/>
+  </node>
+
+  <!-- Optional: Camera settings configuration using v4l2-ctl
+       Uncomment and modify if you need to set camera parameters -->
+  <!--
+  <node name="camera_config" pkg="gscam" type="v4l2_config.sh" output="screen">
+    <param name="device" value="$(arg DEVICE)"/>
+  </node>
+  -->
+
+</launch>
