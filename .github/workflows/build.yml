@@ -1,0 +1,24 @@
+name: ROS Debian Builder
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build_bookworm_arm64:
+    name: Build for Debian Bookworm ARM64
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Build ROS Debian package
+        uses: jspricke/ros-deb-builder-action@main
+        with:
+          ROS_DISTRO: noetic
+          DEB_DISTRO: bookworm
+          DEB_ARCH: arm64
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SQUASH_HISTORY: true
