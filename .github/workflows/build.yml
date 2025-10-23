@@ -12,7 +12,7 @@ on:
 jobs:
   build_focal_arm64:
     name: Build for Ubuntu Focal ARM64
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Build ROS Debian package
         uses: jspricke/ros-deb-builder-action@main
