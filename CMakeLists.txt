@@ -103,9 +103,7 @@ else()
     )
 
   install(FILES
-    examples/v4l.launch
-    examples/gscam_nodelet.launch
-    examples/nodelet_pipeline.launch
+    examples/multiplanar_camera.launch
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
     )
 
