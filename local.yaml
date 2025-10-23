@@ -1,0 +1,3 @@
+gscam:
+  ubuntu:
+  - ros-noetic-gscam

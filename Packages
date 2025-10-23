@@ -1,0 +1,36 @@
+Package: ros-noetic-gscam-dbgsym
+Package-Type: ddeb
+Architecture: arm64
+Version: 0-2025.10.23.22.20
+Auto-Built-Package: debug-symbols
+Priority: optional
+Section: debug
+Source: ros-noetic-gscam
+Maintainer: Jonathan Bohren <jbo@jhu.edu>
+Installed-Size: 1247
+Depends: ros-noetic-gscam (= 0-2025.10.23.22.20)
+Filename: ./ros-noetic-gscam-dbgsym_0-2025.10.23.22.20_arm64.ddeb
+Size: 1174540
+MD5sum: 5342544a371113de1806e719728429b8
+SHA1: 8c823f436a7700a2d2c4f0a3140e3511fc6d5ca6
+SHA256: fd8b23626da1463acf476a9a41a844add6c266bd8c7e303099f8e7acd074dca5
+SHA512: e988bd479f703e039e6afe1aa4d02c1fd1436b124afe21462d8522f0cd6d4fc4048d7f1431f5562c82116efb3a97e69fd93c408e9eff0c8590508fe32bd67452
+Description: debug symbols for ros-noetic-gscam
+Build-Ids: 47fa3bd6d7d52e4e1602bf0fcb65cfc8e6cbf58b 629487ac546876fdadd75682668234485cea0fae a9151a26465b9d2a994912d66dc209cfdc9a74bd
+
+Package: ros-noetic-gscam
+Architecture: arm64
+Version: 0-2025.10.23.22.20
+Priority: optional
+Section: misc
+Maintainer: Jonathan Bohren <jbo@jhu.edu>
+Installed-Size: 288
+Depends: libboost-thread1.71.0, libc6 (>= 2.17), libconsole-bridge0.4, libgcc-s1 (>= 3.0), libglib2.0-0 (>= 2.16.0), libgstreamer-plugins-base1.0-0 (>= 1.0.0), libgstreamer1.0-0 (>= 1.6.0), libstdc++6 (>= 9), ros-noetic-camera-calibration-parsers, ros-noetic-camera-info-manager, ros-noetic-cv-bridge, ros-noetic-image-transport, ros-noetic-nodelet, ros-noetic-roscpp, ros-noetic-sensor-msgs
+Filename: ./ros-noetic-gscam_0-2025.10.23.22.20_arm64.deb
+Size: 66632
+MD5sum: 983459fa1724940a465674bfcb2f567d
+SHA1: a5069fc93b36461020bbce44d0a27a3a40515669
+SHA256: 4bb08692c36809c39b0b6d15439479065548d86481680a44b6965dc5f3899ca7
+SHA512: 71344746879f975feec4190d97cf3bb9b0778bde5563e8e36d0d02c04330c9365cb7d193886d652b49d903b5d5012cd4f9c6cfb1bd1560b9b882113c8192c500
+Description: A ROS camera driver that uses gstreamer to connect to devices such as webcams.
+

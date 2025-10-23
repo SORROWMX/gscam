@@ -1,0 +1,36 @@
+Format: 1.8
+Date: Thu, 06 Sep 2018 00:00:00 -0000
+Source: ros-noetic-gscam
+Binary: ros-noetic-gscam
+Architecture: arm64
+Version: 0-2025.10.23.22.20
+Distribution: focal
+Urgency: high
+Maintainer: Jonathan Bohren <jbo@jhu.edu>
+Changed-By: Jonathan Bohren <jbo@jhu.edu>
+Description:
+ ros-noetic-gscam - A ROS camera driver that uses gstreamer to connect to devices suc
+Changes:
+ ros-noetic-gscam (0-2025.10.23.22.20) focal; urgency=high
+ .
+   * Merge pull request #52 <https://github.com/ros-drivers/gscam/issues/52> from k-okada/add_travis
+     update travis.yml
+   * Update README.md
+     gscam -> GSCam
+   * update travis.yml
+   * Merge pull request #40 <https://github.com/ros-drivers/gscam/issues/40> from ros-drivers/mikaelarguedas-patch-1
+     update to use non deprecated pluginlib macro
+   * update to use non deprecated pluginlib macro
+   * Contributors: Kei Okada, Mikael Arguedas
+Checksums-Sha1:
+ 8c823f436a7700a2d2c4f0a3140e3511fc6d5ca6 1174540 ros-noetic-gscam-dbgsym_0-2025.10.23.22.20_arm64.ddeb
+ b343e4fa1a7cde4b9b099b5bc973f6e6f8dbd13b 31286 ros-noetic-gscam_0-2025.10.23.22.20_arm64.buildinfo
+ a5069fc93b36461020bbce44d0a27a3a40515669 66632 ros-noetic-gscam_0-2025.10.23.22.20_arm64.deb
+Checksums-Sha256:
+ fd8b23626da1463acf476a9a41a844add6c266bd8c7e303099f8e7acd074dca5 1174540 ros-noetic-gscam-dbgsym_0-2025.10.23.22.20_arm64.ddeb
+ b8bd24bd84e006e7e684f921939147019a89740daa79eb20d0c37bcdd0861d77 31286 ros-noetic-gscam_0-2025.10.23.22.20_arm64.buildinfo
+ 4bb08692c36809c39b0b6d15439479065548d86481680a44b6965dc5f3899ca7 66632 ros-noetic-gscam_0-2025.10.23.22.20_arm64.deb
+Files:
+ 5342544a371113de1806e719728429b8 1174540 debug optional ros-noetic-gscam-dbgsym_0-2025.10.23.22.20_arm64.ddeb
+ 39f26ae655e6735b95750fb83fa1d5af 31286 misc optional ros-noetic-gscam_0-2025.10.23.22.20_arm64.buildinfo
+ 983459fa1724940a465674bfcb2f567d 66632 misc optional ros-noetic-gscam_0-2025.10.23.22.20_arm64.deb
