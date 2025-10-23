@@ -63,11 +63,11 @@ This can be run as both a node and a nodelet.
 * `gscam`
 
 #### Topics
-* `camera/image_raw`
-* `camera/camera_info`
+* `main_camera/image_raw`
+* `main_camera/camera_info`
 
 #### Services
-* `camera/set_camera_info`
+* `main_camera/set_camera_info`
 
 #### Parameters
 * `~camera_name`: The name of the camera (corrsponding to the camera info)
