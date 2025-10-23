@@ -10,18 +10,18 @@
   <maintainer email="ros-orphaned-packages@googlegroups.com">ROS Orphaned Package Maintainers</maintainer>
   <license>BSD</license>
 
-  <author email="jbo@jhu.edu">Jonathan Bohren</author>
+  <author email="jbo@jhu.edu"> Jonathan Bohren</author>
   <author email="tjay@cs.brown.edu">Graylin Trevor Jay</author>
   <author email="chriscrick@cs.brown.edu">Christopher Crick</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <!-- System library dependencies with minimum version requirements -->
-  <depend version_gte="1.74.0">libboost-thread-dev</depend>
-  <depend version_gte="1.0.1">libconsole-bridge-dev</depend>
-  <depend version_gte="2.16.0">libglib2.0-dev</depend>
-  <depend version_gte="1.0.0">libgstreamer-plugins-base1.0-dev</depend>
-  <depend version_gte="1.6.0">libgstreamer1.0-dev</depend>
+  <!-- System library dependencies -->
+  <depend>libboost-thread-dev</depend>
+  <depend>libconsole-bridge-dev</depend>
+  <depend>libglib2.0-dev</depend>
+  <depend>libgstreamer-plugins-base1.0-dev</depend>
+  <depend>libgstreamer1.0-dev</depend>
 
   <!-- ROS package dependencies (format 3 uses <depend> instead of build/run_depend) -->
   <depend>nodelet</depend>
