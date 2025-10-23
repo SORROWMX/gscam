@@ -107,9 +107,10 @@ else()
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
     )
 
-  install(FILES examples/uncalibrated_parameters.ini
-    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/examples
-    )
+  # Commented out: file does not exist in repository
+  # install(FILES examples/uncalibrated_parameters.ini
+  #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/examples
+  #   )
 
   # Interim compatibility
   # Remove this in the next release
