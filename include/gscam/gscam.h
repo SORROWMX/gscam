@@ -28,6 +28,7 @@ namespace gscam {
     bool init_stream();
     void publish_stream();
     void cleanup_stream();
+    void rescaleCameraInfo(sensor_msgs::CameraInfo& info, int width, int height);
 
     void run();
 
@@ -44,6 +45,7 @@ namespace gscam {
     bool preroll_;
     bool reopen_on_eof_;
     bool use_gst_timestamps_;
+    bool rescale_camera_info_;
 
     // Camera publisher configuration
     std::string frame_id_;
