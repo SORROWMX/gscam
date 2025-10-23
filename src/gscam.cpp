@@ -44,6 +44,25 @@ namespace gscam {
   {
   }
 
+  void GSCam::rescaleCameraInfo(sensor_msgs::CameraInfo& info, int width, int height)
+  {
+    double width_coeff = static_cast<double>(width) / info.width;
+    double height_coeff = static_cast<double>(height) / info.height;
+    info.width = width;
+    info.height = height;
+
+    // See http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html for clarification
+    info.K[0] *= width_coeff;
+    info.K[2] *= width_coeff;
+    info.K[4] *= height_coeff;
+    info.K[5] *= height_coeff;
+
+    info.P[0] *= width_coeff;
+    info.P[2] *= width_coeff;
+    info.P[5] *= height_coeff;
+    info.P[6] *= height_coeff;
+  }
+
   bool GSCam::configure()
   {
     // Get gstreamer configuration
@@ -75,6 +94,7 @@ namespace gscam {
     nh_private_.param("use_gst_timestamps", use_gst_timestamps_, false);
 
     nh_private_.param("reopen_on_eof", reopen_on_eof_, false);
+    nh_private_.param("rescale_camera_info", rescale_camera_info_, false);
 
     // Get the camera parameters file
     nh_private_.getParam("camera_info_url", camera_info_url_);
@@ -99,7 +119,7 @@ namespace gscam {
 
     // Get TF Frame
     if(!nh_private_.getParam("frame_id",frame_id_)){
-      frame_id_ = "/camera_frame";
+      frame_id_ = "main_camera_optical";
       ROS_WARN_STREAM("No camera frame_id set, using frame \""<<frame_id_<<"\".");
       nh_private_.setParam("frame_id",frame_id_);
     }
@@ -220,10 +240,10 @@ namespace gscam {
 
     // Create ROS camera interface
     if (image_encoding_ == "jpeg") {
-        jpeg_pub_ = nh_.advertise<sensor_msgs::CompressedImage>("camera/image_raw/compressed",1);
-        cinfo_pub_ = nh_.advertise<sensor_msgs::CameraInfo>("camera/camera_info",1);
+        jpeg_pub_ = nh_.advertise<sensor_msgs::CompressedImage>("main_camera/image_raw/compressed",1);
+        cinfo_pub_ = nh_.advertise<sensor_msgs::CameraInfo>("main_camera/camera_info",1);
     } else {
-        camera_pub_ = image_transport_.advertiseCamera("camera/image_raw", 1);
+        camera_pub_ = image_transport_.advertiseCamera("main_camera/image_raw", 1);
     }
 
     return true;
@@ -333,6 +353,11 @@ namespace gscam {
       sensor_msgs::CameraInfo cur_cinfo = camera_info_manager_.getCameraInfo();
       sensor_msgs::CameraInfoPtr cinfo;
       cinfo.reset(new sensor_msgs::CameraInfo(cur_cinfo));
+      
+      // Rescale camera info if needed
+      if (rescale_camera_info_ && (cinfo->width != width_ || cinfo->height != height_)) {
+        rescaleCameraInfo(*cinfo, width_, height_);
+      }
       if (use_gst_timestamps_) {
 #if (GST_VERSION_MAJOR == 1)
           cinfo->header.stamp = ros::Time(GST_TIME_AS_USECONDS(buf->pts+bt)/1e6+time_offset_);
